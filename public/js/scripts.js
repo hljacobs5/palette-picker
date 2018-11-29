@@ -6,13 +6,21 @@ var rectangles = document.querySelectorAll('.rectangle')
 
 generateButton.addEventListener('click', generateHexCode)
 
-function generateHexCode {
+class PalettePicker {
+	constructor() {
+		this.projects = []
+	
+
+const generateHexCode = () => {
 	var randomColor = Math.floor(Math.random()*16777215).toString(16);
 }
 
-function createPalette(event) {
+const createPalette = (event) => {
 	var palettes = [];
+
 	
+	}
+
 }
 
 // function toggleLocks(event) {
