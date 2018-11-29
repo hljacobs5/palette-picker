@@ -4,17 +4,29 @@ var generateButton = document.querySelector('.generate-button');
 var paletteName = document.querySelector('.palette-name');
 var rectangles = document.querySelectorAll('.rectangle')
 
-generateButton.addEventListener('click', generateHexCode)
+// generateButton.addEventListener('click', generateHexCode)
 
-function generateHexCode {
-	var randomColor = Math.floor(Math.random()*16777215).toString(16);
+class PalettePicker {
+	constructor() {
+		this.projects = []
+	}
+
+	createPalette () {
+		rectangles.forEach(rectangle => {
+			console.log(rectangle)
+			var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);;
+			rectangle.setAttribute('style', `fill:${randomColor}`)
+		})
+	}
+
+// createProject = () => {
+
+// 	}
+  
+// toggleLocks = () => {
+
+//  	}  
 }
 
-function createPalette(event) {
-	var palettes = [];
-	
-}
-
-// function toggleLocks(event) {
-
-// }
+const User = new PalettePicker();
+User.createPalette()
