@@ -1,11 +1,38 @@
-.left-side {
+body {
+	background-color: #040707;
+}
+
+h1 {
+	color: #FFFFFF;
+}
+
+rect {
+	position: absolute;
+}
+
+image {
+	position: relative;
+}
+
+.upper-half {
+	display: flex;
+	flex-direction: column;
+}
+
+.bottom-half {
 	display: flex;
 }
 
-.middle {
-	display: flex;
-}
-
-.rectangle-one {
+.rectangle {
 	cursor: pointer;
+}
+
+.generate-button {
+	height: 20px;
+	width: 100px;
+}
+
+.palette-name {
+	height: 17px;
+	width: 100px;
 }

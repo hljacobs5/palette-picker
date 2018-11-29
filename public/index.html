@@ -6,52 +6,63 @@
 </head>
 <body>
 	<h1>Palette Picker</h1>
-	<div class='left-side'>
+	<div class='upper-half'>
+		<button class='generate-button'>Generate</button>
 		<svg width='1500' height='300'>
+		  <g>
 			<rect x="0" 
 				  y="10" 
 				  width="100" 
 				  height="200"
 	        	  class='rectangle rectangle-one'
 	        />
+	        <image xlink:href='../icons/locked.svg' />
+	      </g>
+	      <g>
 			<rect x="200" 
 				  y="0" 
 				  width="100" 
 				  height="200"
 				  class='rectangle rectangle-two'
 	        />
+			<image xlink:href='../icons/locked.svg' />
+	      </g>
+	      <g>
 	        <rect x='400' 
 	        	  y='0' 
 	        	  width='100' 
 	        	  height='200'
 	        	  class='rectangle rectangle-three' 
 	        />
+			<image xlink:href='../icons/locked.svg' />
+	      </g>
+	      <g>
 	        <rect x="600" 
 				  y="0" 
 				  width="100" 
 				  height="200"
 				  class='rectangle rectangle-four'
 	        />
+			<image xlink:href='../icons/locked.svg' />
+	      </g>
+	      <g>
 	        <rect x='800' 
 	        	  y='0' 
 	        	  width='100' 
 	        	  height='200' 
-	        	  style="stroke: #009900; fill: #33ff33;
-	        	  "
 	        	  class='rectangle rectangle-five' 
 	        />
-		</svg>
-		
-		<!-- <button class='generate-button'>Generate</button>
-		 <input class='palette-name'>Enter Palette Name</input> -->
-	</div>
-<!-- 	<div class='middle'>
+			<image xlink:href='../icons/locked.svg' height="20" width="20" x='760' y='70'/>
+	      </g>
+		</svg>		
+		 <input class='palette-name' placeholder="Enter Palette Name"></input>
 		<h3>Projects</h3>
 		<input class='project-input'>Enter Project Name</input>
 		<button class='create-project'>Create Project</button>
-	</div> -->
-	<div class='right-side'>
 	</div>
+	<div class='bottom-half'>
+	</div>
+	
 	<script type="text/javascript" src="js/scripts.js"></script>
 </body>
 </html>
