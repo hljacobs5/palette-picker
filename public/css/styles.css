@@ -1,38 +1,150 @@
 body {
-	background-color: #040707;
+	background-color: #778899;
+  	margin: auto 0;
 }
 
 h1 {
 	color: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	font-size: 50px;
+	font-family: 'Elsie Swash Caps', cursive;
 }
 
-rect {
-	position: absolute;
+h3 {
+	display: flex;
+	justify-content: center;
+	font-size: 30px;
+	font-family: 'Elsie Swash Caps', cursive;
+	color: white;
 }
 
-image {
-	position: relative;
+.rectangle-container {
+	display: flex;
+	justify-content: space-around;
+    align-items: center;
 }
+
+.rectangle {
+    padding: 25px;
+    margin: 25px;
+    cursor: pointer;
+    width:150px;
+    height:200px;
+    border: 1px solid #A9A9A9;
+}
+
+.unlocked {
+	background-image: url('../../icons/unlocked.svg');
+	/*background-color: white;*/
+	height: 30px;
+	width: 30px;
+	z-index: 1;
+}
+
+/*.locked {
+	background-image: url('../../icons/locked.svg');
+	
+}*/
+
+/*.rectangle-1 {
+	position: 50 200 100 0;
+	width: 100;
+	height: 200;
+	border: 1px solid #A9A9A9;
+}*/
+
+/*.rectangle-2 {
+	position: 10 250 0 0;
+	width: 100;
+	height: 200;
+	border: 1px solid #A9A9A9;
+}
+
+.rectangle-3 {
+	position: 10 400 0 0;
+	width: 100;
+	height: 200;
+	border: 1px solid #A9A9A9;
+}
+
+.rectangle-4 {
+	position: 10 550 0 0;
+	width: 100;
+	height: 200;
+	border: 1px solid #A9A9A9;
+}
+
+.rectangle-5 {
+	position: 10 700 0 0;
+	width: 100;
+	height: 200;
+	border: 1px solid #A9A9A9;
+}*/
 
 .upper-half {
 	display: flex;
 	flex-direction: column;
 }
 
-.bottom-half {
-	display: flex;
+.select-project {
+	height: 20px;
+	width: 100px;
+	cursor: pointer;
+	font-family: 'Elsie Swash Caps', cursive;
 }
 
-.rectangle {
-	cursor: pointer;
+.palette-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.bottom-half {
+	display: flex;
+	flex-direction: column;
 }
 
 .generate-button {
 	height: 20px;
 	width: 100px;
+	margin: auto;
+	margin-bottom: 30px;
+	cursor: pointer;
+	font-family: 'Elsie Swash Caps', cursive;
 }
 
 .palette-name {
-	height: 17px;
+	height: 13px;
 	width: 100px;
+	font-family: 'Elsie Swash Caps', cursive;
 }
+
+.create-palette {
+	height: 20px;
+	width: 100px;
+	cursor: pointer;
+	font-family: 'Elsie Swash Caps', cursive;
+}
+
+.project-input {
+	height: 13px;
+	width: 100px;
+	font-family: 'Elsie Swash Caps', cursive;
+}
+
+.create-project {
+	height: 20px;
+	width: 100px;
+	cursor: pointer;
+	font-family: 'Elsie Swash Caps', cursive;
+}
+
+.project-container {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 10rem; 
+}
+

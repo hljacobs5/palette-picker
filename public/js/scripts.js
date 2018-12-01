@@ -2,7 +2,8 @@ var createProjectButton = document.querySelector('.create-project');
 var projectInput = document.querySelector('.project-input');
 var generateButton = document.querySelector('.generate-button');
 var paletteName = document.querySelector('.palette-name');
-var rectangles = document.querySelectorAll('.rectangle')
+const rectangles = document.querySelectorAll('.rectangle')
+var title = document.querySelector('.title')
 
 class PalettePicker {
 	constructor() {
@@ -10,24 +11,38 @@ class PalettePicker {
 	}
 
 	createPalette () {
+		//filter out those rectangles with locked class
 		rectangles.forEach(rectangle => {
-			var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);;
-			rectangle.setAttribute('style', `fill:${randomColor}`)
+			let randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+			rectangle.setAttribute('style', `background-color:${randomColor}`)
 		})
+
+		let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+		title.setAttribute('style', `color:${randomColor}`)
 	}
 
   
-	toggleLocks(event) {
+	toggleLocks() {
+		console.log('hit')
 		rectangles.forEach(rectangle => {
-			rectangle.setAttribute()
+			console.log(rectangle)
+			rectangle.locked = !rectangle.locked;
 		})
 	 }  
-	 
-	// createProject = () => {
+
+	 // lockColor() {
+
+	 // }
+
+	 // savePalette() {
+
+	 // }
+
+	// createProject() {
 
 	// 	}
 
-	// deleteProject() {
+	// deletePalette() {
 
 	// }
 }
