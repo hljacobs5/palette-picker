@@ -12,9 +12,15 @@ class PalettePicker {
 
 	createPalette () {
 		//filter out those rectangles with locked class
+		// let unlockedRectangles = rectangles.filter(rectangle => {
+		// 	return rectangle.children.classList.contains('unlocked')
+		// })
 		rectangles.forEach(rectangle => {
+			let rectangleClasses = rectangle.firstChild.nextSibling.classList;
+		  if (rectangleClasses.contains('unlocked')) {
 			let randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
 			rectangle.setAttribute('style', `background-color:${randomColor}`)
+		   }
 		})
 
 		let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -33,10 +39,6 @@ class PalettePicker {
 			rectangleClasses.add('unlocked')
 		}
 	 }  
-
-	 // lockColor() {
-
-	 // }
 
 	 // savePalette() {
 
