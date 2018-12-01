@@ -4,17 +4,14 @@ var generateButton = document.querySelector('.generate-button');
 var paletteName = document.querySelector('.palette-name');
 var rectangles = document.querySelectorAll('.rectangle')
 var title = document.querySelector('.title')
+var savePalette = document.querySelector('.create-palette')
 
 class PalettePicker {
 	constructor() {
 		this.projects = []
 	}
 
-	createPalette () {
-		//filter out those rectangles with locked class
-		// let unlockedRectangles = rectangles.filter(rectangle => {
-		// 	return rectangle.children.classList.contains('unlocked')
-		// })
+	createPalette() {
 		rectangles.forEach(rectangle => {
 			let rectangleClasses = rectangle.firstChild.nextSibling.classList;
 		  if (rectangleClasses.contains('unlocked')) {
@@ -40,9 +37,25 @@ class PalettePicker {
 		}
 	 }  
 
-	 // savePalette() {
+	 savePalette() {
+	 	let hexCodes = [];
+	 	let name = paletteName.value
+	 	rectangles.forEach(rectangle => {
+			let rgb = rectangle.style['background-color']
+			let hexCode = '#' + rgb.substr(4, rgb.indexOf(')') - 4).split(',').map((color) => parseInt(color).toString(16)).join('');
+	 		hexCodes.push(hexCode)
+	 	})
 
-	 // }
+	 	let postObject = {
+	 		title: name,
+	 		hexCodes: hexCodes
+	 	}
+
+	 	fetch('http://localhost:3000/api/v1/palettes', {
+  			method: 'POST',
+  			body: JSON.stringify(postObject)
+		});
+	 }
 
 	// createProject() {
 
@@ -56,7 +69,7 @@ class PalettePicker {
 const User = new PalettePicker();
 
 generateButton.addEventListener('click', User.createPalette)
-
+savePalette.addEventListener('click', User.savePalette)
 for(i=0; i < rectangles.length; i++) {
 	rectangles[i].addEventListener('click', User.toggleLocks)
 }
