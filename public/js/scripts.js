@@ -2,7 +2,7 @@ var createProjectButton = document.querySelector('.create-project');
 var projectInput = document.querySelector('.project-input');
 var generateButton = document.querySelector('.generate-button');
 var paletteName = document.querySelector('.palette-name');
-const rectangles = document.querySelectorAll('.rectangle')
+var rectangles = document.querySelectorAll('.rectangle')
 var title = document.querySelector('.title')
 
 class PalettePicker {
@@ -23,11 +23,15 @@ class PalettePicker {
 
   
 	toggleLocks() {
-		console.log('hit')
-		rectangles.forEach(rectangle => {
-			console.log(rectangle)
-			rectangle.locked = !rectangle.locked;
-		})
+		let rectangleClasses = this.firstChild.nextSibling.classList
+		let unlocked = rectangleClasses.contains('unlocked')
+		if (unlocked) {
+			rectangleClasses.remove('unlocked')
+			rectangleClasses.add('locked')	
+		} else {
+			rectangleClasses.remove('locked')
+			rectangleClasses.add('unlocked')
+		}
 	 }  
 
 	 // lockColor() {
@@ -50,4 +54,7 @@ class PalettePicker {
 const User = new PalettePicker();
 
 generateButton.addEventListener('click', User.createPalette)
-rectangles.addEventListener('click', User.toggleLocks)
+
+for(i=0; i < rectangles.length; i++) {
+	rectangles[i].addEventListener('click', User.toggleLocks)
+}

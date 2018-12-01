@@ -42,10 +42,12 @@ h3 {
 	z-index: 1;
 }
 
-/*.locked {
+.locked {
 	background-image: url('../../icons/locked.svg');
-	
-}*/
+	height: 30px;
+	width: 30px;
+	z-index: 1;
+}
 
 /*.rectangle-1 {
 	position: 50 200 100 0;
