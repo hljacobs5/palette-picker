@@ -58,3 +58,6 @@ generateButton.addEventListener('click', User.createPalette)
 for(i=0; i < rectangles.length; i++) {
 	rectangles[i].addEventListener('click', User.toggleLocks)
 }
+
+document.onload = User.createPalette()
+
