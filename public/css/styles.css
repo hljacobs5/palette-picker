@@ -149,3 +149,12 @@ h3 {
     justify-content: center;
 }
 
+.display-projects {
+	display: flex;
+	margin-left: 100px;
+}
+
+.palette-display-div {
+	display: flex;
+}
+

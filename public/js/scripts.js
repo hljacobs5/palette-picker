@@ -93,17 +93,46 @@ class PalettePicker {
 	 	})
 
 	 	let article = document.createElement('article');
+	 	let articleH4 = document.createElement('h4')
 	 	let articleTitle = document.createTextNode(project.name);
-	 	article.appendChild(articleTitle)
+	 	articleH4.appendChild(articleTitle)
+	 	article.appendChild(articleH4)
 
+
+	 	this.appendPalettes(projectPalettes, article)
+	 }
+
+	 appendPalettes(projectPalettes, article) {
 	 	projectPalettes.forEach(projPal =>{
-	 		console.log(projPal)
-	 		let articleHexes = document.createTextNode(projPal.hexcodes)
-	 		article.appendChild(articleHexes)
+	 		let paletteDiv = document.createElement('div')
+	 		paletteDiv.setAttribute('style', 'display: flex; justify-content: space-around; align-items: center; width: 33%;')
+	 		
+	 		let paletteTitleH6 = document.createElement('h6')
+	 		let paletteTitle = document.createTextNode(projPal.title)
+	 		
+	 		paletteTitleH6.appendChild(paletteTitle)
+	 		paletteDiv.appendChild(paletteTitleH6)
+	 		
+	 		let paletteDisplayDiv = document.createElement('div')
+	 		paletteDisplayDiv.classList.add('palette-display-div')
+
+	 		for(i=0; i < projPal['hexcodes'].length; i++) {
+	 			let paletteHexDiv = document.createElement('div')
+	 			paletteHexDiv.setAttribute('style', `background-color:${projPal.hexcodes[i]}; height: 20px; width: 20px;`)
+	 			paletteDisplayDiv.append(paletteHexDiv)
+	 		}
+
+	 		paletteDiv.appendChild(paletteDisplayDiv)
+
+
+	 		article.appendChild(paletteDiv)
+
+
+
+	 		// let articleHexes = document.createTextNode(projPal.hexcodes)
+	 		// article.appendChild(articleHexes)
 	 	})
-
 	 	displayProjects.appendChild(article)
-
 	 }
 
 	// deletePalette() {
