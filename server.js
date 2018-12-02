@@ -12,15 +12,17 @@ app.locals.palettes = [
 	{id: 3, title: 'Nature', hexCodes: ['#FFF', '#000']}
 ];
 
+
+
 app.set('port', process.env.PORT || 3000);
 
 app.get('/', (request, response) => {
 	response.send('palette picker');
 });
 
-// app.get('/api/v1/projects', (request, response) => {
+app.get('/api/v1/projects', (request, response) => {
 	
-// })
+})
 
 app.get('/api/v1/palettes', (request, response) => {
 	const palettes = app.locals.palettes;
