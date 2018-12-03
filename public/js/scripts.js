@@ -7,6 +7,7 @@ var title = document.querySelector('.title');
 var savePalette = document.querySelector('.create-palette');
 var displayProjects = document.querySelector('.display-projects');
 var createProjectButton = document.querySelector('.create-project');
+var projectSelector = document.querySelector('.select-project');
 var allPalettes = [];
 
 class PalettePicker {
@@ -40,66 +41,96 @@ class PalettePicker {
 		}
 	 }  
 
+	convertRgbToHex(rgb) {
+	    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+	    function hex(x) {
+	        return ("0" + parseInt(x).toString(16)).slice(-2);
+	    }
+	    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+
 	 savePalette() {
 	 	let hexCodes = [];
+	 	var selectedProject = projectSelector[projectSelector.selectedIndex].value;
 	 	let name = paletteName.value
+
 	 	rectangles.forEach(rectangle => {
 			let rgb = rectangle.style['background-color']
-			let hexCode = '#' + rgb.substr(4, rgb.indexOf(')') - 4).split(',').map((color) => parseInt(color).toString(16)).join('');
+	 		let hexCode = this.convertRgbToHex(rgb)
+			// let hexCode = '#' + rgb.substr(4, rgb.indexOf(')') - 4).split(',').map((color) => parseInt(color).toString(16)).join('');
 	 		hexCodes.push(hexCode)
 	 	})
 
 	 	let postObject = {
 	 		title: name,
 	 		hexCodes: hexCodes,
-	 		id: 7
+	 		project_id: selectedProject
 	 	}
 
 	 	fetch('/api/v1/palettes', {
   			method: 'POST',
-  			headers:{'contentType': 'application/json'},
+  			headers:{'Content-Type': 'application/json'},
   			body: JSON.stringify(postObject)
 		})
 		.then(response => console.log(response.json()))
 	 }
 
-	// createProject() {
-
-	// 	}
-	getPalettes() {
-		let palettes = [{'id': 1, "title": "hi", "hexcodes": ["#8573a", "#36261f", "#9a6b40", "#12842e", "#87f1"]},
-						{'id': 2, "title": "hello", "hexcodes": ["#FFFFFF", "#36261f", "#9a6b40", "#12842e", "#87f1"]}]
-		palettes.forEach(palette => {
-			allPalettes.push(palette)
+	createProject() {
+		let postObject = {
+			name: projectInput.value,
+		}
+		fetch('/api/v1/projects', {
+			method: 'POST',
+  			headers:{'Content-Type': 'application/json'},
+			body: JSON.stringify(postObject)
 		})
+		.then(response => {return response.json()})
+		.then(jsonResponse => this.getProjects())
 	}
 
+	// getPalettes() {
+	// 	palettes.forEach(palette => {
+	// 		allPalettes.push(palette)
+	// 	})
+	// }
+
 	 getProjects() {
-	 	let projects = [{id: 1, name: 'project-1', paletteIds: [2]},
-	 					{id: 2, name: 'project-2', paletteIds: [1, 2]}
-	 				    ]
-	 	projects.forEach(project => {
+		fetch('/api/v1/projects', {
+			method: 'GET'
+		})
+		.then(response => {return response.json()})
+		.then(jsonResponse => {
+
+			for(let project of jsonResponse) {
+				this.fetchPalettes(project)
+			}
+		})	
+	 }
+
+	 fetchPalettes(project) {
+	 	fetch(`/api/v1/${project.id}/palettes`, {
+	 		method: 'GET'
+	 	})
+	 	.then(response => {return response.json()})
+	 	.then(jsonResponse => { 
+	 		project.palettes = jsonResponse
 	 		this.appendProject(project)
 	 	})
+
 	 }
 
 	 appendProject(project) {
-	 	let projectPalettes = [];
-	 	project.paletteIds.forEach(paletteId => {
-	 		let palette = allPalettes.find(palette => {
-	 			return palette.id === paletteId
-	 		}) 
-	 		projectPalettes.push(palette)
-	 	})
-
 	 	let article = document.createElement('article');
 	 	let articleH4 = document.createElement('h4')
 	 	let articleTitle = document.createTextNode(project.name);
+	 	let newOption = document.createElement('option')
+	 	let projectOptions = document.createTextNode(project.name)
+	 	projectSelector.appendChild(newOption)
+	 	newOption.appendChild(projectOptions)
+	 	newOption.setAttribute('value', project.id)
 	 	articleH4.appendChild(articleTitle)
 	 	article.appendChild(articleH4)
-
-
-	 	this.appendPalettes(projectPalettes, article)
+	 	this.appendPalettes(project.palettes, article)
 	 }
 
 	 appendPalettes(projectPalettes, article) {
@@ -116,9 +147,9 @@ class PalettePicker {
 	 		let paletteDisplayDiv = document.createElement('div')
 	 		paletteDisplayDiv.classList.add('palette-display-div')
 
-	 		for(i=0; i < projPal['hexcodes'].length; i++) {
+	 		for(i=0; i < projPal['hexCodes'].length; i++) {
 	 			let paletteHexDiv = document.createElement('div')
-	 			paletteHexDiv.setAttribute('style', `background-color:${projPal.hexcodes[i]}; height: 20px; width: 20px;`)
+	 			paletteHexDiv.setAttribute('style', `background-color:${projPal.hexCodes[i]}; height: 20px; width: 20px;`)
 	 			paletteDisplayDiv.append(paletteHexDiv)
 	 		}
 
@@ -142,15 +173,15 @@ class PalettePicker {
 
 const User = new PalettePicker();
 
-generateButton.addEventListener('click', User.createPalette)
-savePalette.addEventListener('click', User.savePalette)
+generateButton.addEventListener('click', User.createPalette.bind(User))
+savePalette.addEventListener('click', User.savePalette.bind(User))
+createProjectButton.addEventListener('click', User.createProject.bind(User))
 
 for(i=0; i < rectangles.length; i++) {
 	rectangles[i].addEventListener('click', User.toggleLocks)
 }
-
 document.onload = User.createPalette()
-document.onload = User.getPalettes()
+// document.onload = User.getPalettes()
 document.onload = User.getProjects()
 
 
